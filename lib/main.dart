@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:techincal/layouts/home.dart';
+import 'package:techincal/modules/items/items.dart';
 import 'package:techincal/shared/network/remote/dio_helper.dart';
 
 void main() async {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeLayout(),
+      home: ItemsScreen(),
     );
   }
 }

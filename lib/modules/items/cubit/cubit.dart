@@ -8,15 +8,27 @@ class TechItemsCubit extends Cubit<TechItemsStates> {
 
   static TechItemsCubit get(context) => BlocProvider.of(context);
 
-  //ItemModel? itemModel;
-
+  // ItemsModel? itemsModel;
+  //http://technician.amrhs.tech/api/menus?include=categories
+  ItemsModel? itemsModel;
   void getItemsForCategory() {
     DioHelper.getData(Url: 'menus', query: {'include': 'categories'})
         .then((value) {
+      print(value.data);
       print('Done Check');
-      var iitemModel = value.data['data'];
-      print('Done Check');
-      print('${iitemModel[0]['attributes']['menu_name']}');
+      itemsModel = ItemsModel.fromJson(value.data);
+      print(value.data);
+      // itemsModel = value.data['data'];
+      // print('Done Check');
+      // //print(value.data['data']);
+      // // print('${iitemModel[0]['attributes']['menu_name']}');
+      // (value.data['data'] as List<dynamic>).forEach(
+      //   (element) {
+      //     var item = ItemsModel.fromJson(element);
+      //     print("here ${item.toString()}");
+      //     items.add(item);
+      //   },
+      // );
 
       emit(TechItemsSuccessState());
     }).catchError((error) {
