@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:techincal/modules/home/cubit/cubit.dart';
 import 'package:techincal/modules/home/cubit/states.dart';
+import 'package:techincal/modules/items/items.dart';
 import 'package:techincal/shared/components/components.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
@@ -73,7 +74,18 @@ class HomeScreen extends StatelessWidget {
                               .data!
                               .length,
                           itemBuilder: (context, i) {
-                            return CategoryItem(
+                            return InkWell(
+                              onTap: () {
+                                NavigateTo(
+                                    context,
+                                    ItemsScreen(
+                                      TechCategoryCubit.get(context)
+                                          .categoryModel!
+                                          .data![i]
+                                          .id,
+                                    ));
+                              },
+                              child: CategoryItem(
                                 TechCategoryCubit.get(context)
                                     .categoryModel!
                                     .data![i]
@@ -83,7 +95,9 @@ class HomeScreen extends StatelessWidget {
                                     .categoryModel!
                                     .data![i]
                                     .attributes!
-                                    .name);
+                                    .name,
+                              ),
+                            );
                           },
                         ))
                       ],

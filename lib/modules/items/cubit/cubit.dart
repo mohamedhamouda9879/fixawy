@@ -8,27 +8,23 @@ class TechItemsCubit extends Cubit<TechItemsStates> {
 
   static TechItemsCubit get(context) => BlocProvider.of(context);
 
-  // ItemsModel? itemsModel;
-  //http://technician.amrhs.tech/api/menus?include=categories
-  ItemsModel? itemsModel;
-  void getItemsForCategory() {
+  List data = [];
+  List<ItemModel> modelData = [];
+  void getItemsForCategory(String id) {
     DioHelper.getData(Url: 'menus', query: {'include': 'categories'})
         .then((value) {
-      print(value.data);
-      print('Done Check');
-      itemsModel = ItemsModel.fromJson(value.data);
-      print(value.data);
-      // itemsModel = value.data['data'];
-      // print('Done Check');
-      // //print(value.data['data']);
-      // // print('${iitemModel[0]['attributes']['menu_name']}');
-      // (value.data['data'] as List<dynamic>).forEach(
-      //   (element) {
-      //     var item = ItemsModel.fromJson(element);
-      //     print("here ${item.toString()}");
-      //     items.add(item);
-      //   },
-      // );
+      print(value.data['data'][2]['relationships']['categories']['data'][0]
+          ['id']);
+
+      (value.data['data'] as List<dynamic>).forEach((element) {
+        // print(element['relationships']['categories']['data'][0]['id']);
+        if (element['relationships']['categories']['data'][0]['id'] == id) {
+          modelData.add(ItemModel.fromJson(element));
+          print(element);
+        }
+      });
+
+      //print(modelData[0].attributes!.menuName);
 
       emit(TechItemsSuccessState());
     }).catchError((error) {
