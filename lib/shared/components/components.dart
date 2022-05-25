@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:ffi';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +61,7 @@ Widget ItemWidget(String text) => Padding(
       ),
     );
 
-Widget UserItem(double q, String Networkimage, String name, double rate,
+Widget UserItem(double q, String Networkimage, String name, int rate,
         String descrption) =>
     Padding(
       padding: const EdgeInsets.all(12.0),
@@ -98,7 +100,7 @@ Widget UserItem(double q, String Networkimage, String name, double rate,
                       height: 10,
                     ),
                     RatingBar(
-                      initialRating: rate,
+                      initialRating: rate.toDouble(),
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,

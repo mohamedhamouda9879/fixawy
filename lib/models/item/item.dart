@@ -38,7 +38,7 @@ class Attributes {
   int? minimumQty;
   bool? menuStatus;
   int? menuPriority;
-  Null? orderRestriction;
+  dynamic? orderRestriction;
   String? createdAt;
   String? updatedAt;
   int? stockQty;

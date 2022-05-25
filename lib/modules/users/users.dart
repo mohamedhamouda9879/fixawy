@@ -48,31 +48,38 @@ class UsersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => TechCustomersCubit(),
+      create: (context) => TechCustomersCubit()..getCustomers(),
       child: BlocConsumer<TechCustomersCubit, TechCustomersStates>(
         listener: (context, state) {
-          // TODO: implement listener
+        
         },
         builder: (context, state) {
           return SafeArea(
             child: Scaffold(
-              floatingActionButton: FloatingActionButton(onPressed: () {
-                TechCustomersCubit.get(context).getCustomers();
-              }),
               backgroundColor: HexColor('#001a2b'),
               body: ConditionalBuilderRec(
                 condition: true,
                 builder: (context) => AnimationLimiter(
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: products.length,
+                    itemCount:
+                        TechCustomersCubit.get(context).customerModel.length,
                     itemBuilder: (context, index) {
                       return UserItem(
                           mq.width * .5,
                           products[index].image,
-                          products[index].name,
-                          products[index].rate,
-                          products[index].descrption);
+                          TechCustomersCubit.get(context)
+                              .customerModel[index]
+                              .attributes!
+                              .fullName!,
+                          TechCustomersCubit.get(context)
+                              .customerModel[index]
+                              .attributes!
+                              .rating!,
+                          TechCustomersCubit.get(context)
+                              .customerModel[index]
+                              .attributes!
+                              .notes!);
                     },
                     separatorBuilder: (BuildContext context, int index) {
                       return const SizedBox(

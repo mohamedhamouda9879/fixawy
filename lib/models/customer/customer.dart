@@ -12,16 +12,6 @@ class CustomerModel {
         ? new Attributes.fromJson(json['attributes'])
         : null;
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['type'] = this.type;
-    data['id'] = this.id;
-    if (this.attributes != null) {
-      data['attributes'] = this.attributes!.toJson();
-    }
-    return data;
-  }
 }
 
 class Attributes {
@@ -45,6 +35,8 @@ class Attributes {
   String? lastSeen;
   String? updatedAt;
   String? lastLocationArea;
+  int? rating;
+  String? notes;
   String? fullName;
 
   Attributes(
@@ -68,6 +60,8 @@ class Attributes {
       this.lastSeen,
       this.updatedAt,
       this.lastLocationArea,
+      this.rating,
+      this.notes,
       this.fullName});
 
   Attributes.fromJson(Map<String, dynamic> json) {
@@ -91,32 +85,8 @@ class Attributes {
     lastSeen = json['last_seen'];
     updatedAt = json['updated_at'];
     lastLocationArea = json['last_location_area'];
+    rating = json['rating'];
+    notes = json['notes'];
     fullName = json['full_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['email'] = this.email;
-    data['telephone'] = this.telephone;
-    data['address_id'] = this.addressId;
-    data['newsletter'] = this.newsletter;
-    data['customer_group_id'] = this.customerGroupId;
-    data['ip_address'] = this.ipAddress;
-    data['created_at'] = this.createdAt;
-    data['status'] = this.status;
-    data['reset_code'] = this.resetCode;
-    data['reset_time'] = this.resetTime;
-    data['activation_code'] = this.activationCode;
-    data['remember_token'] = this.rememberToken;
-    data['is_activated'] = this.isActivated;
-    data['date_activated'] = this.dateActivated;
-    data['last_login'] = this.lastLogin;
-    data['last_seen'] = this.lastSeen;
-    data['updated_at'] = this.updatedAt;
-    data['last_location_area'] = this.lastLocationArea;
-    data['full_name'] = this.fullName;
-    return data;
   }
 }

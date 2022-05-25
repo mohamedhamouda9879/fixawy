@@ -76,6 +76,8 @@ class HomeScreen extends StatelessWidget {
                           itemBuilder: (context, i) {
                             return InkWell(
                               onTap: () {
+                                print(
+                                    'ne ${TechCategoryCubit.get(context).categoryModel!.data![i].id}');
                                 NavigateTo(
                                     context,
                                     ItemsScreen(

@@ -13,9 +13,9 @@ class TechItemsCubit extends Cubit<TechItemsStates> {
   void getItemsForCategory(String id) {
     DioHelper.getData(Url: 'menus', query: {'include': 'categories'})
         .then((value) {
-      print(value.data['data'][2]['relationships']['categories']['data'][0]
-          ['id']);
-
+      print(
+          ' error ${value.data['data'][2]['relationships']['categories']['data'][0]['id']}');
+      print('eizkp');
       (value.data['data'] as List<dynamic>).forEach((element) {
         // print(element['relationships']['categories']['data'][0]['id']);
         if (element['relationships']['categories']['data'][0]['id'] == id) {
@@ -23,8 +23,6 @@ class TechItemsCubit extends Cubit<TechItemsStates> {
           print(element);
         }
       });
-
-      //print(modelData[0].attributes!.menuName);
 
       emit(TechItemsSuccessState());
     }).catchError((error) {
