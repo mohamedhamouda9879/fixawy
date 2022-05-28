@@ -3,9 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:techincal/modules/home/home.dart';
 import 'package:techincal/modules/login/cubit/cubit.dart';
 import 'package:techincal/modules/login/cubit/states.dart';
 import 'package:techincal/shared/components/components.dart';
+import 'package:techincal/shared/components/constants.dart';
+import 'package:techincal/shared/network/local/cache_helper.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -18,7 +21,29 @@ class SignInScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => TechLoginCubit(),
       child: BlocConsumer<TechLoginCubit, TechLoginStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is TechLoginSucessStates) {
+            if (state.TechLoginModel.token != null) {
+              print(
+                  'hamouda user f l login token ${state.TechLoginModel.token.toString()}');
+              CacheHelper.saveData(
+                      key: 'token', value: state.TechLoginModel.token)
+                  .then((value) {
+                TOKEN = state.TechLoginModel.token.toString();
+                // USERID = state.TechLoginModel.user!.id.toString();
+                NavigateAndFinish(context, HomeScreen());
+              });
+              showToast(
+                  message: 'Successfully Login',
+                  toastStates: ToastStates.SUCCESS);
+            } else {
+              print('hamouda error f eno ygeb l token 34an b null');
+              // print(state.TechLoginModel.token);
+              showToast(
+                  message: "Wrong Sign In", toastStates: ToastStates.EROOR);
+            }
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
