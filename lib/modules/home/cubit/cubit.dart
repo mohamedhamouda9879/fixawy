@@ -14,6 +14,7 @@ class TechCategoryCubit extends Cubit<TechCategoryStates> {
   void getCategory(BuildContext context) {
     DioHelper.getData(Url: 'categories').then((value) {
       categoryModel = CategoryModel.fromJson(value.data);
+
       print('bos kda ${categoryModel!.data![0].attributes!.name}');
       emit(TechCategorySucessStates());
     }).catchError((error) {

@@ -23,29 +23,16 @@ class TechLoginCubit extends Cubit<TechLoginStates> {
       Url: 'token',
       query: {'email': email, 'password': password, 'device_name': 'Hadota'},
     ).then((value) {
-      print(value.data);
       if (value.statusCode == 201 || value.statusCode == 200) {
-        print('amr');
         TechLoginModel = LoginModel.fromJson(value.data);
-        print(value.toString());
-        print('hamouda login y basha ');
+
         if (TechLoginModel!.statusCode == 201) {
+          //         if (TechLoginModel!.customerType != 1) {
+          //  NavigateAndFinish(context, HomeLayout());
+          //         }
           NavigateAndFinish(context, HomeLayout());
           emit(TechLoginSucessStates(TechLoginModel!));
-        } else {
-          print('hamouda');
-          // showToast(
-          //     message: "Email or password wrong",
-          //     toastStates: ToastStates.EROOR);
-          // emit(TechLoginErrorStates(value.data));
         }
-      } else {
-        print('hamouda');
-        loginModelError = LoginModelError.fromJson(value.data);
-        print(loginModelError!.message);
-        showToast(
-            message: loginModelError!.errors!.email!.first,
-            toastStates: ToastStates.EROOR);
       }
     }).catchError(((error) {
       if (error is DioError) {

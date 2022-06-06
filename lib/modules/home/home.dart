@@ -5,6 +5,7 @@ import 'package:techincal/modules/home/cubit/cubit.dart';
 import 'package:techincal/modules/home/cubit/states.dart';
 import 'package:techincal/modules/items/items.dart';
 import 'package:techincal/shared/components/components.dart';
+import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,6 +24,7 @@ class HomeScreen extends StatelessWidget {
             return Scaffold(
               resizeToAvoidBottomInset: true,
               body: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
                     alignment: Alignment.center,
@@ -39,20 +41,26 @@ class HomeScreen extends StatelessWidget {
                         width: double.infinity,
                         height: mq.height * .30,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Card(
-                          elevation: 12,
-                          shadowColor: defaultColor,
-                          child: defaultFormField(
-                              controller: searchController,
-                              type: TextInputType.name,
-                              validate: (String? value) {},
-                              label: 'Search',
-                              prefix: Icons.search),
-                        ),
-                      ),
+                      Image.asset('assets/images/bg.jpeg'),
                     ],
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: HexColor('#001a2b'),
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      "Categories",
+                      style: TextStyle(
+                        shadows: [
+                          Shadow(color: Colors.white, offset: Offset(0, -5))
+                        ],
+                        fontSize: 22.0,
+                        color: Colors.transparent,
+                        decoration: TextDecoration.underline,
+                        decorationColor: Color.fromARGB(255, 255, 108, 34),
+                        decorationThickness: 4,
+                      ),
+                    ),
                   ),
                   Expanded(
                     child: Stack(
@@ -78,6 +86,11 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 print(
                                     'ne ${TechCategoryCubit.get(context).categoryModel!.data![i].id}');
+                                CategoryId = TechCategoryCubit.get(context)
+                                    .categoryModel!
+                                    .data![i]
+                                    .id
+                                    .toString();
                                 NavigateTo(
                                     context,
                                     ItemsScreen(

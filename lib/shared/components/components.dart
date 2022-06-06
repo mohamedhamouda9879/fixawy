@@ -1,15 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:ffi';
-
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:techincal/shared/components/constants.dart';
+import 'package:techincal/shared/network/local/cache_helper.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
 Widget defaultButton({
@@ -60,9 +58,56 @@ Widget ItemWidget(String text) => Padding(
         ),
       ),
     );
-
-Widget UserItem(double q, String Networkimage, String name, int rate,
-        String descrption) =>
+Widget OrderItem(String comment, String status, String time, String date) =>
+    Container(
+      padding: EdgeInsets.all(12),
+      height: 140,
+      child: Card(
+        elevation: 12.0,
+        shadowColor: defaultColor,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Text('$comment',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              '$status',
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: EdgeInsets.only(right: 15, left: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('$time'),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text('$date'),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+Widget UserItem(
+        double q,
+        String Networkimage,
+        String name,
+        int rate,
+        String descrption,
+        BuildContext context,
+        VoidCallback? voidCallback,
+        VoidCallback? voidCallback2,
+        String phone) =>
     Padding(
       padding: const EdgeInsets.all(12.0),
       child: Card(
@@ -144,7 +189,28 @@ Widget UserItem(double q, String Networkimage, String name, int rate,
                 child: Column(
                   children: [
                     defaultButton(
-                      function: () {},
+                      function: () {
+                        final popup = BeautifulPopup(
+                          context: context,
+                          template: TemplateGift,
+                        );
+                        popup.show(
+                          title: 'Technician',
+                          content: 'Create An Order !!',
+                          actions: [
+                            popup.button(
+                              label: 'Create',
+                              onPressed: voidCallback!,
+                            ),
+                            popup.button(
+                              label: 'Close',
+                              onPressed: Navigator.of(context).pop,
+                            ),
+                          ],
+                          // bool barrierDismissible = false,
+                          // Widget close,
+                        );
+                      },
                       text: 'Book',
                       radius: 12.0,
                     ),
@@ -152,7 +218,33 @@ Widget UserItem(double q, String Networkimage, String name, int rate,
                       height: 5.0,
                     ),
                     defaultButton(
-                        function: () {}, text: 'Contact', radius: 12.0)
+                        function: () {
+                          Phone = CacheHelper.getData(key: 'phone');
+
+                          final popup = BeautifulPopup(
+                            context: context,
+                            template: TemplateGift,
+                          );
+                          popup.show(
+                            title: 'Technician',
+                            content:
+                                'Call The Technician?  \nname : $name \nphone : $phone',
+                            actions: [
+                              popup.button(
+                                label: 'Call',
+                                onPressed: voidCallback2!,
+                              ),
+                              popup.button(
+                                label: 'Close',
+                                onPressed: Navigator.of(context).pop,
+                              ),
+                            ],
+                            // bool barrierDismissible = false,
+                            // Widget close,
+                          );
+                        },
+                        text: 'Contact',
+                        radius: 12.0)
                   ],
                 ),
               )
@@ -182,12 +274,14 @@ Widget CategoryItem(String? image, String? title) => Card(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 100,
-              height: 75,
+              width: double.infinity,
+              height: 100,
+              padding: EdgeInsets.only(left: 4, right: 4, top: 4),
               child: CachedNetworkImage(
                 imageUrl: "$image",
                 imageBuilder: (context, imageProvider) => Container(
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
                       image: imageProvider,
                       fit: BoxFit.cover,
@@ -199,7 +293,7 @@ Widget CategoryItem(String? image, String? title) => Card(
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 10,
             ),
             Text(
               '$title',
@@ -207,9 +301,6 @@ Widget CategoryItem(String? image, String? title) => Card(
                   color: Colors.white,
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 15,
             ),
           ],
         ),

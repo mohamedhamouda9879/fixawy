@@ -5,9 +5,9 @@ import 'package:techincal/layouts/cubit/cubit.dart';
 import 'package:techincal/layouts/cubit/states.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
-class HomeLayout extends StatelessWidget {
+class HomeLayoutTech extends StatelessWidget {
   PersistentTabController? _controller =
-      PersistentTabController(initialIndex: 1);
+      PersistentTabController(initialIndex: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,8 @@ class HomeLayout extends StatelessWidget {
               body: PersistentTabView(
                 context,
                 controller: _controller,
-                screens: AppCubit.get(context).buildScreens(),
-                items: AppCubit.get(context).navBarsItems(),
+                screens: AppCubit.get(context).buildScreensTech(),
+                items: AppCubit.get(context).navBarsItemsTech(),
                 confineInSafeArea: true,
                 backgroundColor: defaultColor, // Default is Colors.white.
                 handleAndroidBackButtonPress: true, // Default is true.

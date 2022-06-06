@@ -14,7 +14,7 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(context) => BlocProvider.of(context);
 
   List<Widget> buildScreens() {
-    return [ProfileScreen(), HomeScreen(), FavoriteScreen()];
+    return [ProfileScreen(), HomeScreen(), const FavoriteScreen()];
   }
 
   List<PersistentBottomNavBarItem> navBarsItems() {
@@ -32,8 +32,29 @@ class AppCubit extends Cubit<AppStates> {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.settings),
-        title: ("Favourite"),
+        icon: Icon(CupertinoIcons.shopping_cart),
+        title: ("Orders"),
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+    ];
+  }
+
+  List<Widget> buildScreensTech() {
+    return [ProfileScreen(), const FavoriteScreen()];
+  }
+
+  List<PersistentBottomNavBarItem> navBarsItemsTech() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.profile_circled),
+        title: ("Profile"),
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.shopping_cart),
+        title: ("Orders"),
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

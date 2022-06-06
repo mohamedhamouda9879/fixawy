@@ -18,9 +18,18 @@ void printFullText(String text) {
 }
 
 String? TOKEN = '';
+int? CustomerTYPE = 0;
 
 String NEWSID = '';
 String? USERID = '';
 
 String POSTID = '';
 bool checkFav = false;
+String CategoryId = '';
+
+String ItemName = '';
+
+String FirstName = '';
+String LastName = '';
+String Phone = '';
+String Email = '';

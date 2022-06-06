@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:techincal/layouts/home.dart';
+import 'package:techincal/layouts/home_tech.dart';
 import 'package:techincal/modules/home/home.dart';
 import 'package:techincal/modules/login/login.dart';
 import 'package:techincal/shared/bloc_observer.dart';
@@ -10,6 +11,7 @@ import 'package:techincal/shared/network/local/cache_helper.dart';
 import 'package:techincal/shared/network/remote/dio_helper.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await DioHelper.init();
   await CacheHelper.init();
   BlocOverrides.runZoned(
@@ -19,11 +21,16 @@ void main() async {
     blocObserver: MyBlocObserver(),
   );
   Widget widget;
-  // TOKEN = CacheHelper.getData(key: 'token');
-  // USERID = CacheHelper.getData(key: 'UserID');
-
+  TOKEN = CacheHelper.getData(key: 'token');
+  CustomerTYPE = CacheHelper.getData(key: 'type');
+  USERID = CacheHelper.getData(key: 'userId').toString();
+  print(TOKEN);
   if (TOKEN != null) {
-    widget = HomeScreen();
+    if (CustomerTYPE != 1) {
+      widget = HomeLayoutTech();
+    } else {
+      widget = HomeLayout();
+    }
   } else {
     widget = const LoginScreen();
   }
@@ -38,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: startWidget,
     );
   }
 }

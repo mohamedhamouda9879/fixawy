@@ -6,7 +6,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:techincal/modules/items/cubit/cubit.dart';
 import 'package:techincal/modules/items/cubit/states.dart';
+import 'package:techincal/modules/users/users.dart';
 import 'package:techincal/shared/components/components.dart';
+import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
 class ItemsScreen extends StatelessWidget {
@@ -42,19 +44,7 @@ class ItemsScreen extends StatelessWidget {
                         width: double.infinity,
                         height: mq.height * .30,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Card(
-                          elevation: 12,
-                          shadowColor: defaultColor,
-                          child: defaultFormField(
-                              controller: searchController,
-                              type: TextInputType.name,
-                              validate: (String? value) {},
-                              label: 'Search',
-                              prefix: Icons.search),
-                        ),
-                      ),
+                      Image.asset('assets/images/bg.jpeg'),
                     ],
                   ),
                   Expanded(
@@ -76,17 +66,35 @@ class ItemsScreen extends StatelessWidget {
                                     .modelData
                                     .length,
                                 itemBuilder: (context, index) {
-                                  return AnimationConfiguration.staggeredList(
-                                    position: index,
-                                    duration: const Duration(milliseconds: 500),
-                                    child: SlideAnimation(
-                                      verticalOffset: 50.0,
-                                      child: FadeInAnimation(
-                                        child: ItemWidget(
-                                            TechItemsCubit.get(context)
-                                                .modelData[index]
-                                                .attributes!
-                                                .menuName!),
+                                  return InkWell(
+                                    onTap: () {
+                                      NavigateTo(
+                                          context,
+                                          UsersScreen(
+                                              CategoryId,
+                                              TechItemsCubit.get(context)
+                                                  .modelData[index]
+                                                  .attributes!
+                                                  .menuName,
+                                              TechItemsCubit.get(context)
+                                                  .modelData[index]
+                                                  .attributes!
+                                                  .menuPrice
+                                                  .toString()));
+                                    },
+                                    child: AnimationConfiguration.staggeredList(
+                                      position: index,
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      child: SlideAnimation(
+                                        verticalOffset: 50.0,
+                                        child: FadeInAnimation(
+                                          child: ItemWidget(
+                                              TechItemsCubit.get(context)
+                                                  .modelData[index]
+                                                  .attributes!
+                                                  .menuName!),
+                                        ),
                                       ),
                                     ),
                                   );

@@ -32,11 +32,14 @@ class DioHelper {
   static Future<Response> updateData({
     required String Url,
     Map<String, dynamic>? query,
+    Map<String, dynamic>? data,
+    String? auth,
   }) async {
-    return await dio.put(
-      Url,
-      queryParameters: query,
-    );
+    dio.options.headers = {
+      'Content-Type': 'application/json',
+      'Authorization': auth,
+    };
+    return await dio.patch(Url, queryParameters: query, data: data);
   }
 
   static Future<Response> postData({
