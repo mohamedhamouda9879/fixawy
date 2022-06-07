@@ -9,9 +9,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mq = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -21,11 +21,15 @@ class LoginScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Container(
-                height: mq.height * 0.99,
+                height: 900,
                 color: Colors.black26,
                 child: ContainedTabBarView(
-                  tabBarProperties:
-                      TabBarProperties(indicatorColor: defaultColor),
+                  initialIndex: 0,
+                  callOnChangeWhileIndexIsChanging: true,
+                  tabBarProperties: TabBarProperties(
+                    indicatorColor: defaultColor,
+                  ),
+                  onChange: (index) => print(index),
                   tabs: [
                     Text(
                       'Login',

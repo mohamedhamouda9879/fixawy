@@ -20,17 +20,12 @@ class TechCustomersCubit extends Cubit<TechCustomersStates> {
       Url: 'customers',
       auth: 'Bearer $TOKEN',
     ).then((value) {
-      print('object');
-      print('doen');
-      print(id);
       (value.data['data'] as List<dynamic>).forEach((element) {
         if (element['attributes']['customer_group_id'] == int.parse(id)) {
           customerModel.add(CustomerModel.fromJson(element));
         }
-
-        print(element);
       });
-      print('done $customerModel');
+
       emit(TechCustomersSuccessState());
     }).catchError((error) {
       print(error);
@@ -68,8 +63,6 @@ class TechCustomersCubit extends Cubit<TechCustomersStates> {
       "user_agent": "1",
       "order_total": double.parse(price)
     }).then((value) {
-      print('Order created');
-      print(value.data);
       showToast(message: 'Order Created', toastStates: ToastStates.SUCCESS);
       emit(TechOrdersSuccessState());
     }).catchError((error) {

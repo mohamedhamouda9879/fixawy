@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:techincal/layouts/cubit/cubit.dart';
 import 'package:techincal/layouts/cubit/states.dart';
+import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
 class HomeLayoutTech extends StatelessWidget {
@@ -15,7 +16,9 @@ class HomeLayoutTech extends StatelessWidget {
       create: (context) => AppCubit(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-          if (state is AppChangeBottomNavState) {}
+          if (state is AppLogOut) {
+            SignOut(context);
+          }
         },
         builder: (context, state) {
           return SafeArea(

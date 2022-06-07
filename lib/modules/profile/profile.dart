@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:techincal/layouts/cubit/cubit.dart';
+import 'package:techincal/layouts/cubit/states.dart';
 import 'package:techincal/modules/profile/infocard.dart';
 import 'package:techincal/shared/components/components.dart';
 import 'package:techincal/shared/components/constants.dart';
@@ -12,51 +15,54 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.blueGrey[800],
-        body: SafeArea(
-          minimum: const EdgeInsets.only(top: 100),
-          child: Column(
-            children: <Widget>[
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/images/bg.jpeg'),
-              ),
-              Text(
-                "$FullName",
-                style: TextStyle(
-                  fontSize: 40.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Pacifico",
+    return BlocProvider(
+      create: (context) => AppCubit(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+              backgroundColor: Colors.blueGrey[800],
+              body: SafeArea(
+                minimum: const EdgeInsets.only(top: 100),
+                child: Column(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('assets/images/bg.jpeg'),
+                    ),
+                    Text(
+                      "$FullName",
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Pacifico",
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 20,
+                      width: 200,
+                      child: Divider(
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    // we will be creating a new widget name info carrd
+
+                    InfoCard(
+                        text: phone, icon: Icons.phone, onPressed: () async {}),
+
+                    InfoCard(
+                        text: email, icon: Icons.email, onPressed: () async {}),
+                    SizedBox(
+                      height: 15,
+                    ),
+                  ],
                 ),
-              ),
-
-              SizedBox(
-                height: 20,
-                width: 200,
-                child: Divider(
-                  color: Colors.white,
-                ),
-              ),
-
-              // we will be creating a new widget name info carrd
-
-              InfoCard(text: phone, icon: Icons.phone, onPressed: () async {}),
-
-              InfoCard(text: email, icon: Icons.email, onPressed: () async {}),
-              SizedBox(
-                height: 15,
-              ),
-              defaultButton(
-                  function: () {
-                    SignOut(context);
-                  },
-                  text: 'Logout',
-                  radius: 12,
-                  width: 250)
-            ],
-          ),
-        ));
+              ));
+        },
+      ),
+    );
   }
 }

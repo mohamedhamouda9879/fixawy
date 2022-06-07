@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:techincal/layouts/home_tech.dart';
 import 'package:techincal/models/order/order.dart';
-import 'package:techincal/modules/favourite/cubit/states.dart';
-import 'package:techincal/modules/favourite/favourite.dart';
+import 'package:techincal/modules/orders/cubit/states.dart';
+import 'package:techincal/modules/orders/orders.dart';
 import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/network/remote/dio_helper.dart';
 
@@ -20,12 +20,9 @@ class TechGetOrdersCubit extends Cubit<TechGetOrdersStates> {
     await DioHelper.getData(Url: 'orders', auth: 'Bearer $TOKEN').then((value) {
       (value.data['data'] as List<dynamic>).forEach((element) {
         orderModel.add(OrderModel.fromJson(element));
-        print(element);
       });
       emit(TechGetOrdersSucessStates());
     }).catchError((error) {
-      print('error');
-      print(error);
       emit(TechGetOrdersErrorStates(error));
     });
   }
@@ -38,18 +35,13 @@ class TechGetOrdersCubit extends Cubit<TechGetOrdersStates> {
                 'Bearer 66|ETeNju3cN2maMnptL8uy23Eu3fSvR4agGABL8L0KhbNFMcwgTwXkc0PT4peEwmvozS2sf8oU4qTy7j3o')
         .then((value) {
       (value.data['data'] as List<dynamic>).forEach((element) {
-        print(USERID);
         if (element['attributes']['tech_id'] == int.parse(USERID!)) {
           orderModelTech.add(OrderModel.fromJson(element));
         }
-
-        print(element);
       });
-      print('len ${orderModelTech.length}');
+
       emit(TechGetOrdersTechSucessStates());
     }).catchError((error) {
-      print('error');
-      print(error);
       emit(TechGetOrdersTechErrorStates(error));
     });
   }

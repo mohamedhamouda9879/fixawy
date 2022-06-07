@@ -79,13 +79,14 @@ class UsersScreen extends StatelessWidget {
                             now.toString(),
                             price!);
 
-                        Navigator.of(context).pop;
+                        Navigator.of(context, rootNavigator: true)
+                            .pop('dialog');
                       }, () async {
                         FirstName = CacheHelper.getData(key: 'firstname');
                         LastName = CacheHelper.getData(key: 'lastname');
                         Email = CacheHelper.getData(key: 'email');
                         Phone = CacheHelper.getData(key: 'phone');
-                        print('print phone : $Phone');
+
                         await FlutterPhoneDirectCaller.callNumber(Phone);
                       }, Phone);
                     },
@@ -118,11 +119,4 @@ class UsersScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class ProductModel {
-  String name, image, descrption;
-  double rate;
-
-  ProductModel(this.name, this.image, this.descrption, this.rate);
 }

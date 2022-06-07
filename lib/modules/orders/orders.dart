@@ -6,14 +6,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:techincal/layouts/home_tech.dart';
-import 'package:techincal/modules/favourite/cubit/cubit.dart';
-import 'package:techincal/modules/favourite/cubit/states.dart';
+import 'package:techincal/modules/orders/cubit/cubit.dart';
+import 'package:techincal/modules/orders/cubit/states.dart';
 import 'package:techincal/shared/components/components.dart';
 import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
-class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+class OrdersScreen extends StatelessWidget {
+  const OrdersScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

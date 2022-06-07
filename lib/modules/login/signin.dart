@@ -14,9 +14,9 @@ import 'package:techincal/shared/network/local/cache_helper.dart';
 import 'package:techincal/shared/styles/colors.dart';
 
 class SignInScreen extends StatelessWidget {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,6 @@ class SignInScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is TechLoginSucessStates) {
             if (state.TechLoginModel.token != null) {
-              print(
-                  'hamouda user f l login token ${state.TechLoginModel.token.toString()}');
               CacheHelper.saveData(
                       key: 'token', value: state.TechLoginModel.token)
                   .then((value) {

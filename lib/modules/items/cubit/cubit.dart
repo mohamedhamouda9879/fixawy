@@ -8,19 +8,13 @@ class TechItemsCubit extends Cubit<TechItemsStates> {
 
   static TechItemsCubit get(context) => BlocProvider.of(context);
 
-  List data = [];
   List<ItemModel> modelData = [];
   void getItemsForCategory(String id) {
     DioHelper.getData(Url: 'menus', query: {'include': 'categories'})
         .then((value) {
-      print(
-          ' error ${value.data['data'][2]['relationships']['categories']['data'][0]['id']}');
-      print('eizkp');
       (value.data['data'] as List<dynamic>).forEach((element) {
-        // print(element['relationships']['categories']['data'][0]['id']);
         if (element['relationships']['categories']['data'][0]['id'] == id) {
           modelData.add(ItemModel.fromJson(element));
-          print(element);
         }
       });
 

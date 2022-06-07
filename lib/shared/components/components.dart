@@ -256,8 +256,8 @@ Widget UserItem(
 
 Widget CategoryItem(String? image, String? title) => Card(
       elevation: 5,
-      margin: EdgeInsets.all(30),
-      shape: RoundedRectangleBorder(
+      margin: EdgeInsets.all(15),
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           side: BorderSide(width: 2, color: defaultColor)),
       child: Container(
@@ -271,7 +271,7 @@ Widget CategoryItem(String? image, String? title) => Card(
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               width: double.infinity,
@@ -291,9 +291,6 @@ Widget CategoryItem(String? image, String? title) => Card(
                 placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-            ),
-            SizedBox(
-              height: 10,
             ),
             Text(
               '$title',
