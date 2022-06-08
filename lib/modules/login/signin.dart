@@ -12,6 +12,7 @@ import 'package:techincal/shared/components/components.dart';
 import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/network/local/cache_helper.dart';
 import 'package:techincal/shared/styles/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignInScreen extends StatelessWidget {
   final emailController = TextEditingController();
@@ -185,26 +186,46 @@ class SignInScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
-                            Icons.face,
-                            color: defaultColor,
-                            size: 30,
+                          InkWell(
+                            onTap: () {
+                              Uri url =
+                                  Uri.parse('https://www.facebook.com/login/');
+                              _launchUrl(url);
+                            },
+                            child: Icon(
+                              Icons.facebook,
+                              color: defaultColor,
+                              size: 30,
+                            ),
                           ),
                           const SizedBox(
                             width: 15,
                           ),
-                          const Icon(
-                            Icons.social_distance,
-                            color: defaultColor,
-                            size: 30,
+                          InkWell(
+                            onTap: () {
+                              Uri url = Uri.parse('https://web.whatsapp.com/');
+                              _launchUrl(url);
+                            },
+                            child: Icon(
+                              Icons.whatsapp,
+                              color: defaultColor,
+                              size: 30,
+                            ),
                           ),
                           const SizedBox(
                             width: 15,
                           ),
-                          const Icon(
-                            Icons.message,
-                            color: defaultColor,
-                            size: 30,
+                          InkWell(
+                            onTap: () {
+                              Uri url = Uri.parse(
+                                  'https://accounts.snapchat.com/accounts/login?client_id=geo');
+                              _launchUrl(url);
+                            },
+                            child: Icon(
+                              Icons.snapchat,
+                              color: defaultColor,
+                              size: 30,
+                            ),
                           ),
                         ],
                       )
@@ -215,5 +236,10 @@ class SignInScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  //final Uri url = Uri.parse('https://flutter.dev');
+  void _launchUrl(Uri urll) async {
+    if (!await launchUrl(urll)) throw 'Could not launch $urll';
   }
 }
