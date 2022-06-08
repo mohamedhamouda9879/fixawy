@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                     color: HexColor('#001a2b'),
                     padding: EdgeInsets.all(8),
                     child: Text(
-                      "Categories",
+                      "Choose the type Of Service",
                       style: TextStyle(
                         shadows: [
                           Shadow(color: Colors.white, offset: Offset(0, -5))

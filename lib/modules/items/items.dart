@@ -27,6 +27,21 @@ class ItemsScreen extends StatelessWidget {
           //print(TechItemsCubit.get(context).modelData[0].attributes!.menuName);
           if (state is TechItemsSuccessState) {
             return Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                flexibleSpace: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: <Color>[
+                          Color.fromARGB(255, 245, 140, 12),
+                          Color.fromARGB(255, 250, 56, 2)
+                        ]),
+                  ),
+                ),
+                title: const Text('items'),
+              ),
               body: Column(
                 children: [
                   Stack(
