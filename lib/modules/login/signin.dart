@@ -140,7 +140,8 @@ class SignInScreen extends StatelessWidget {
                                 return 'Password is Too Short';
                               return null;
                             },
-                            isPassword: true,
+                            isPassword:
+                                TechLoginCubit.get(context).isPasswordShowen,
                             label: 'Password',
                             lines: 1,
                             suffix: TechLoginCubit.get(context).sufix,
