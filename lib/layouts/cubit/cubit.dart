@@ -14,6 +14,19 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(context) => BlocProvider.of(context);
 
+  int currentIndex = 1;
+
+  List<Widget> bottomScreens = [
+    ProfileScreen(),
+    HomeScreen(),
+    const OrdersScreen(),
+  ];
+
+  void changeBottomNav(int index) {
+    currentIndex = index;
+    emit(AppChangeBottomNavState());
+  }
+
   List<Widget> buildScreens() {
     return [ProfileScreen(), HomeScreen(), const OrdersScreen()];
   }

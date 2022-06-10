@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -14,92 +15,75 @@ class HomeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AppCubit(),
-      child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {
-          if (state is AppLogOut) {
-            SignOut(context);
-          }
-        },
-        builder: (context, state) {
-          return SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                  centerTitle: true,
-                  flexibleSpace: Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomLeft,
-                          colors: <Color>[
-                            Color.fromARGB(255, 245, 140, 12),
-                            Color.fromARGB(255, 250, 56, 2)
-                          ]),
-                    ),
+      child: BlocConsumer<AppCubit, AppStates>(listener: (context, state) {
+        if (state is AppLogOut) {
+          SignOut(context);
+        }
+      }, builder: (context, state) {
+        var cubit = AppCubit.get(context);
+        return SafeArea(
+          child: Scaffold(
+            body: cubit.bottomScreens[cubit.currentIndex],
+            appBar: AppBar(
+                centerTitle: true,
+                flexibleSpace: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: <Color>[
+                          Color.fromARGB(255, 245, 140, 12),
+                          Color.fromARGB(255, 250, 56, 2)
+                        ]),
                   ),
-                  title: const Text('Technician'),
-                  actions: [
-                    Container(
-                      width: 100,
-                      child: IconButton(
-                          onPressed: () {
-                            SignOut(context);
-                          },
-                          icon: Row(
-                            children: [
-                              Text('Logout'),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Icon(Icons.logout),
-                            ],
-                          )),
-                    )
-                  ]),
-              body: PersistentTabView(
-                context,
-                controller: controller,
-                screens: AppCubit.get(context).buildScreens(),
-                items: AppCubit.get(context).navBarsItems(),
-                confineInSafeArea: false,
-                backgroundColor: defaultColor, // Default is Colors.white.
-                handleAndroidBackButtonPress: false, // Default is true.
-                resizeToAvoidBottomInset:
-                    true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-                stateManagement: false, // Default is true.
-                hideNavigationBarWhenKeyboardShows:
-                    true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-                decoration: NavBarDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 245, 140, 12),
-                      Color.fromARGB(255, 250, 56, 2),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0)),
-                  colorBehindNavBar: Colors.white,
                 ),
-                // popAllScreensOnTapOfSelectedTab: true,
-                // popActionScreens: PopActionScreensType.all,
-                itemAnimationProperties: ItemAnimationProperties(
-                  // Navigation Bar's items animation properties.
-                  duration: Duration(milliseconds: 200),
-                  curve: Curves.ease,
+                title: const Text('Technician'),
+                automaticallyImplyLeading: false,
+                // leading: BackButton(color: Colors.white),
+                actions: [
+                  Container(
+                    width: 100,
+                    child: IconButton(
+                        onPressed: () {
+                          SignOut(context);
+                        },
+                        icon: Row(
+                          children: [
+                            Text('Logout'),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(Icons.logout),
+                          ],
+                        )),
+                  )
+                ]),
+            bottomNavigationBar: CurvedNavigationBar(
+              height: 55,
+              backgroundColor: defaultColor,
+              index: cubit.currentIndex,
+              // ignore: prefer_const_literals_to_create_immutables
+              items: <Widget>[
+                const Icon(
+                  Icons.person,
+                  size: 25,
                 ),
-                screenTransitionAnimation: ScreenTransitionAnimation(
-                  // Screen transition animation on change of selected tab.
-                  animateTabTransition: true,
-                  curve: Curves.ease,
-                  duration: Duration(milliseconds: 200),
+                const Icon(
+                  Icons.home,
+                  size: 25,
                 ),
-                navBarStyle: NavBarStyle
-                    .style1, // Choose the nav bar style with this property.
-              ),
+                const Icon(
+                  Icons.shopping_bag,
+                  size: 25,
+                ),
+              ],
+              onTap: (index) {
+                cubit.changeBottomNav(index);
+              },
             ),
-          );
-        },
-      ),
+          ),
+        );
+      }),
     );
   }
 }

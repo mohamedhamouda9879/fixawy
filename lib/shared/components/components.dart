@@ -40,7 +40,7 @@ Widget defaultButton({
     );
 //https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80
 
-Widget ItemWidget(String text) => Padding(
+Widget ItemWidget(String text, String price) => Padding(
       padding: const EdgeInsets.all(12.0),
       child: Center(
         child: SizedBox(
@@ -50,9 +50,21 @@ Widget ItemWidget(String text) => Padding(
             shadowColor: defaultColor,
             elevation: 8,
             child: Center(
-                child: Text(
-              '$text',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                child: Column(
+              children: [
+                Text(
+                  '$text',
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  '$price',
+                  style:
+                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal),
+                ),
+              ],
             )),
           ),
         ),
@@ -197,6 +209,38 @@ Widget UserItem(
                         popup.show(
                           title: 'Technician',
                           content: 'Create An Order !!',
+                          // close: defaultButton(
+                          //     function: () {
+                          //       List<String> genderList = ['Male', 'Female'];
+                          //       String? dropmenuGender;
+                          //       late String valuegender;
+                          //       DropdownButtonFormField(
+                          //         isExpanded: true,
+                          //         decoration: InputDecoration(
+                          //             border: const OutlineInputBorder(
+                          //               borderRadius: BorderRadius.all(
+                          //                 Radius.circular(15.0),
+                          //               ),
+                          //             ),
+                          //             filled: true,
+                          //             hintStyle:
+                          //                 TextStyle(color: Colors.grey[800]),
+                          //             hintText: "Gender",
+                          //             fillColor: Colors.white),
+                          //         value: dropmenuGender,
+                          //         onChanged: (String? Value) {
+                          //           valuegender = Value!;
+                          //         },
+                          //         items: genderList
+                          //             .map((cityTitle) => DropdownMenuItem(
+                          //                 value: cityTitle,
+                          //                 child: Text(cityTitle)))
+                          //             .toList(),
+                          //       );
+                          //     },
+                          //     text: 'Please choose your area',
+                          //     radius: 12,
+                          //     width: 250),
                           actions: [
                             popup.button(
                               label: 'Create',

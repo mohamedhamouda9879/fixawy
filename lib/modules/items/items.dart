@@ -22,13 +22,22 @@ class ItemsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => TechItemsCubit()..getItemsForCategory(categoryId!),
       child: BlocConsumer<TechItemsCubit, TechItemsStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is TechItemsSuccessState) {
+            BAR = true;
+          }
+        },
         builder: (context, state) {
           //print(TechItemsCubit.get(context).modelData[0].attributes!.menuName);
           if (state is TechItemsSuccessState) {
             return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
+                leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
                 flexibleSpace: Container(
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
@@ -40,7 +49,9 @@ class ItemsScreen extends StatelessWidget {
                         ]),
                   ),
                 ),
-                title: const Text('items'),
+                title: const Text('Items'),
+
+                // leading: BackButton(color: Colors.white),
               ),
               body: Column(
                 children: [
@@ -108,7 +119,12 @@ class ItemsScreen extends StatelessWidget {
                                               TechItemsCubit.get(context)
                                                   .modelData[index]
                                                   .attributes!
-                                                  .menuName!),
+                                                  .menuName!,
+                                              TechItemsCubit.get(context)
+                                                  .modelData[index]
+                                                  .attributes!
+                                                  .menuPrice!
+                                                  .toString()),
                                         ),
                                       ),
                                     ),

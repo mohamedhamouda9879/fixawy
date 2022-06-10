@@ -27,11 +27,6 @@ class OrdersScreen extends StatelessWidget {
           print(' bos kda l type${CustomerTYPE.toString()}');
           return Scaffold(
             backgroundColor: HexColor('#001a2b'),
-            appBar: AppBar(
-              backgroundColor: defaultColor,
-              title: Text('Orders'),
-              centerTitle: true,
-            ),
             body: ConditionalBuilderRec(
               condition: CustomerTYPE != 1
                   ? TechGetOrdersCubit.get(context).orderModelTech.isNotEmpty

@@ -28,7 +28,7 @@ bool checkFav = false;
 String CategoryId = '';
 
 String ItemName = '';
-
+bool BAR = false;
 String FirstName = '';
 String LastName = '';
 String Phone = '';

@@ -31,6 +31,11 @@ class UsersScreen extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 centerTitle: true,
+                leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
                 flexibleSpace: Container(
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
@@ -42,7 +47,9 @@ class UsersScreen extends StatelessWidget {
                         ]),
                   ),
                 ),
-                title: const Text('items'),
+                title: const Text('Items'),
+
+                // leading: BackButton(color: Colors.white),
               ),
               backgroundColor: HexColor('#001a2b'),
               body: ConditionalBuilderRec(
