@@ -95,7 +95,7 @@ class SignInScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
-                        'Welcome',
+                        'مرحبا',
                         style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
@@ -105,7 +105,7 @@ class SignInScreen extends StatelessWidget {
                         height: 15,
                       ),
                       const Text(
-                        'Lorem ipsum dolor sit amst , consetetur sadipscing elitr ,sed diam nonmy eirmod',
+                        'مرحبا بك في الابليكشن نحن متخصصين في توفير الحرفيين لحلول جميع مشاكلك',
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -121,11 +121,11 @@ class SignInScreen extends StatelessWidget {
                             type: TextInputType.emailAddress,
                             validate: (String? value) {
                               if (value!.isEmpty) {
-                                return 'Please Enter Your Email';
+                                return 'من فضلك ادخل البريد الالكتروني';
                               }
                               return null;
                             },
-                            label: 'Email',
+                            label: 'البريد الالكتروني',
                             prefix: Icons.email),
                       ),
                       const SizedBox(
@@ -137,13 +137,12 @@ class SignInScreen extends StatelessWidget {
                             controller: passwordController,
                             type: TextInputType.visiblePassword,
                             validate: (String? value) {
-                              if (value!.isEmpty)
-                                return 'Password is Too Short';
+                              if (value!.isEmpty) return 'الرقم السري صغير ';
                               return null;
                             },
                             isPassword:
                                 TechLoginCubit.get(context).isPasswordShowen,
-                            label: 'Password',
+                            label: 'الرقم السري',
                             lines: 1,
                             suffix: TechLoginCubit.get(context).sufix,
                             suffixPressed: () {
@@ -165,16 +164,9 @@ class SignInScreen extends StatelessWidget {
                                   password: passwordController.text,
                                   context: context);
                             },
-                            text: 'Login',
+                            text: 'تسجيل',
                             radius: 12.0,
                             isUpperCase: true),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Text(
-                        'Forget Password?',
-                        style: TextStyle(color: Colors.white),
                       ),
                       const SizedBox(
                         height: 15,

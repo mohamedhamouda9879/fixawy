@@ -32,11 +32,11 @@ class LoginScreen extends StatelessWidget {
                   onChange: (index) => print(index),
                   tabs: [
                     Text(
-                      'Login',
+                      'تسجيل ',
                       style: TextStyle(color: Colors.white),
                     ),
                     Text(
-                      'SignUp',
+                      'تسجيل دخول',
                       style: TextStyle(color: Colors.white),
                     ),
                   ],
