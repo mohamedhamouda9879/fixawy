@@ -49,7 +49,7 @@ class ItemsScreen extends StatelessWidget {
                         ]),
                   ),
                 ),
-                title: const Text('Items'),
+                title: const Text('التخصصات'),
 
                 // leading: BackButton(color: Colors.white),
               ),

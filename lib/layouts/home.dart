@@ -42,14 +42,14 @@ class HomeLayout extends StatelessWidget {
                 // leading: BackButton(color: Colors.white),
                 actions: [
                   Container(
-                    width: 100,
+                    width: 130,
                     child: IconButton(
                         onPressed: () {
                           SignOut(context);
                         },
                         icon: Row(
                           children: [
-                            Text('Logout'),
+                            Text('تسجيل خروج'),
                             SizedBox(
                               width: 5,
                             ),

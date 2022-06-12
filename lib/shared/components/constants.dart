@@ -22,11 +22,12 @@ int? CustomerTYPE = 0;
 
 String NEWSID = '';
 String? USERID = '';
-
+const String locationDisabledError = 'Location services are disabled.';
 String POSTID = '';
 bool checkFav = false;
 String CategoryId = '';
-
+String LONG = '';
+String LAT = '';
 String ItemName = '';
 bool BAR = false;
 String FirstName = '';

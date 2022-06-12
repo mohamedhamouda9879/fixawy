@@ -1,12 +1,15 @@
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:techincal/models/customer/customer.dart';
 import 'package:techincal/modules/users/cubit/states.dart';
 import 'package:techincal/shared/components/components.dart';
 import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/network/remote/dio_helper.dart';
+import 'package:techincal/shared/network/utils/utils.dart';
 
 class TechCustomersCubit extends Cubit<TechCustomersStates> {
   TechCustomersCubit() : super(TechCustomersInitialState());
@@ -14,6 +17,8 @@ class TechCustomersCubit extends Cubit<TechCustomersStates> {
   static TechCustomersCubit get(context) => BlocProvider.of(context);
 
   List<CustomerModel> customerModel = [];
+  double? lat;
+  double? long;
 
   void getCustomers(String id) {
     DioHelper.getData(
@@ -69,5 +74,18 @@ class TechCustomersCubit extends Cubit<TechCustomersStates> {
       print(error);
       emit(TechOrdersErrorState(error));
     });
+  }
+
+  void getLocation(BuildContext context) async {
+    try {
+      Position pos = await determinePosition();
+      LAT = pos.latitude.toString();
+      LONG = pos.longitude.toString();
+
+      print('${lat} --- $long');
+    } catch (err) {
+      showSnackBar(context, err.toString());
+      //add(LocationError(err.toString()));
+    }
   }
 }

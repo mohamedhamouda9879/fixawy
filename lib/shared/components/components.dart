@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/network/local/cache_helper.dart';
@@ -73,7 +74,7 @@ Widget ItemWidget(String text, String price) => Padding(
 Widget OrderItem(String comment, String status, String time, String date) =>
     Container(
       padding: EdgeInsets.all(12),
-      height: 140,
+      height: 160,
       child: Card(
         elevation: 12.0,
         shadowColor: defaultColor,
@@ -110,6 +111,34 @@ Widget OrderItem(String comment, String status, String time, String date) =>
         ),
       ),
     );
+TextStyle subTitleTextStyle({
+  bool isDark = false,
+  FontWeight fontWeight = FontWeight.w400,
+  double fontSize = 14,
+  FontStyle fontStyle = FontStyle.normal,
+}) {
+  return GoogleFonts.montserrat(
+    fontSize: fontSize,
+    color: isDark ? AppColors.dartSubtextColor : AppColors.subTextColor,
+    fontWeight: fontWeight,
+    fontStyle: fontStyle,
+  );
+}
+
+TextStyle titleTextStyle({
+  bool isDark = false,
+  FontWeight fontWeight = FontWeight.w500,
+  double fontSize = 15,
+  FontStyle fontStyle = FontStyle.normal,
+}) {
+  return GoogleFonts.montserrat(
+    fontSize: fontSize,
+    color: isDark ? AppColors.darkTextColor : AppColors.textColor,
+// fontWeight: fontWeight,
+    fontStyle: fontStyle,
+  );
+}
+
 Widget UserItem(
         double q,
         String Networkimage,

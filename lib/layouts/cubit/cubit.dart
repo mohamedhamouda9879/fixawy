@@ -21,6 +21,10 @@ class AppCubit extends Cubit<AppStates> {
     HomeScreen(),
     const OrdersScreen(),
   ];
+  List<Widget> bottomScreenstech = [
+    ProfileScreen(),
+    const OrdersScreen(),
+  ];
 
   void changeBottomNav(int index) {
     currentIndex = index;

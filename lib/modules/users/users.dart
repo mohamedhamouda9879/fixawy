@@ -23,7 +23,9 @@ class UsersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => TechCustomersCubit()..getCustomers(GroupId!),
+      create: (context) => TechCustomersCubit()
+        ..getCustomers(GroupId!)
+        ..getLocation(context),
       child: BlocConsumer<TechCustomersCubit, TechCustomersStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -47,7 +49,7 @@ class UsersScreen extends StatelessWidget {
                         ]),
                   ),
                 ),
-                title: const Text('Items'),
+                title: const Text('الحرفيين'),
 
                 // leading: BackButton(color: Colors.white),
               ),
@@ -96,7 +98,7 @@ class UsersScreen extends StatelessWidget {
                             LastName,
                             Email,
                             Phone,
-                            menuName!,
+                            '${menuName!}-long: $LONG - Lat: $LAT ',
                             formattedDate,
                             now.toString(),
                             price!);
