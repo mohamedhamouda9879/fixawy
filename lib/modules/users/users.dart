@@ -98,7 +98,7 @@ class UsersScreen extends StatelessWidget {
                             LastName,
                             Email,
                             Phone,
-                            '${menuName!}-long: $LONG - Lat: $LAT ',
+                            '${menuName!} - ${TechCustomersCubit.get(context).currentAddress}',
                             formattedDate,
                             now.toString(),
                             price!);

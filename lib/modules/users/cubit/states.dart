@@ -11,6 +11,8 @@ class TechCustomersErrorState extends TechCustomersStates {
 
 class TechOrdersSuccessState extends TechCustomersStates {}
 
+class TechLocationState extends TechCustomersStates {}
+
 class TechOrdersErrorState extends TechCustomersStates {
   String error;
   TechOrdersErrorState(this.error);

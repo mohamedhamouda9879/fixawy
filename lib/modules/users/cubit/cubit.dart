@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import 'package:dio/dio.dart';
+import 'package:geocoder2/geocoder2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:techincal/models/customer/customer.dart';
 import 'package:techincal/modules/users/cubit/states.dart';
@@ -79,13 +80,36 @@ class TechCustomersCubit extends Cubit<TechCustomersStates> {
   void getLocation(BuildContext context) async {
     try {
       Position pos = await determinePosition();
-      LAT = pos.latitude.toString();
-      LONG = pos.longitude.toString();
+      lat = pos.latitude;
+      long = pos.longitude;
+      // GeoData data = await Geocoder2.getDataFromCoordinates(
+      //     latitude: lat!,
+      //     longitude: long!,
+      //     googleMapApiKey: "AIzaSyAFv8KHiwoyUTTErSjwBtiPQJgEgf9l-aM");
 
+      // print(data.state);
+      // LONG = data.state;
       print('${lat} --- $long');
+
+      getAddressFromLatLng();
     } catch (err) {
       showSnackBar(context, err.toString());
       //add(LocationError(err.toString()));
+    }
+  }
+
+  String? currentAddress;
+  getAddressFromLatLng() async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(lat!, long!);
+
+      Placemark place = placemarks[0];
+
+      currentAddress = " ${place.locality}";
+      print(currentAddress);
+      emit(TechLocationState());
+    } catch (e) {
+      print(e);
     }
   }
 }

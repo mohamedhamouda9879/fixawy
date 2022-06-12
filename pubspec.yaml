@@ -67,6 +67,9 @@ dependencies:
   connectivity_plus: ^2.3.3
   equatable: ^2.0.3
   meta: ^1.7.0
+  geocoding: ^2.0.4
+  geocoder2: ^1.1.2
+  
 
   
 
