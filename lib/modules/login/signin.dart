@@ -8,6 +8,7 @@ import 'package:techincal/layouts/home_tech.dart';
 import 'package:techincal/modules/home/home.dart';
 import 'package:techincal/modules/login/cubit/cubit.dart';
 import 'package:techincal/modules/login/cubit/states.dart';
+import 'package:techincal/modules/login/forget.dart';
 import 'package:techincal/shared/components/components.dart';
 import 'package:techincal/shared/components/constants.dart';
 import 'package:techincal/shared/network/local/cache_helper.dart';
@@ -171,6 +172,11 @@ class SignInScreen extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
+                      defaultTextButton(
+                          function: () {
+                            NavigateTo(context, ForgetScreen());
+                          },
+                          text: "هل نسيت كلمة السر ؟"),
                       myDivider(),
                       const SizedBox(
                         height: 15,

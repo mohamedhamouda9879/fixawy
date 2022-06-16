@@ -54,8 +54,10 @@ class OrdersScreen extends StatelessWidget {
                     print(formatted);
                     return InkWell(
                       onTap: () {
-                        TechGetOrdersCubit.get(context)
-                            .showDialog(context, index);
+                        if (CustomerTYPE != 1) {
+                          TechGetOrdersCubit.get(context)
+                              .showDialog(context, index);
+                        }
                       },
                       child: AnimationConfiguration.staggeredList(
                         position: index,
